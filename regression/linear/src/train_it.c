@@ -242,7 +242,7 @@ return;
 TMP=mlearning_multiply_double_scalar_with_column_vector((LEARNING_RATE*(1.0/I_rows)),ITE);  
 if(TMP==NULL)
 {
-printf("Low  bvvbvbvbv  memory\n");
+printf("Low memory\n");
 mlearning_mat_double_destroy(dataset);
 mlearning_mat_double_destroy(I);
 mlearning_mat_double_destroy(history);
