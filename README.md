@@ -11,3 +11,6 @@ Validation: Using techniques like cross-validation to ensure the model generaliz
 End user Application :
 Application\IceCreamSalesProfitPredictorApp.c
 takes temperature (in celsius) as input and predicts profit based on the given temperature.
+Various tools used in developing the application:
+Training and Testing of the datasets.
+Scaling of datasets.
