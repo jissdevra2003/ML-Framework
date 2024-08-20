@@ -11,7 +11,7 @@ mlearning_column_vec_double*c_vector;
 mlearning_row_vec_double*r_vector;
 mlearning_column_vec_double*prediction_vector;
 printf("Ice Cream Sales Profit Prediction Application\n\nProfit vision\n\n");
-printf("Enter temperature 3e3e    :");
+printf("Enter temperature :");
 scanf("%lf",&temperature);
 fflush(stdin);
 temperature_f=(temperature*9.0/5.0)+32.0;
