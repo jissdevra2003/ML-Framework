@@ -1,0 +1,6 @@
+#ifndef __M__LEARNING__SCALE__DOUBLE__
+#define __M__LEARNING__SCALE__DOUBLE__
+#include<mlearning_matrix.h>
+mlearning_mat_double * mlearning_scale_double_min_max(mlearning_mat_double*matrix,index_t start_row_index,index_t start_column_index,index_t end_row_index,index_t end_column_index,char*min_max_file);
+mlearning_mat_double * mlearning_scale_double_with_given_min_max(mlearning_mat_double*matrix,index_t start_row_index,index_t start_column_index,index_t end_row_index,index_t end_column_index,mlearning_mat_double*min_max_matrix);
+#endif
