@@ -6,7 +6,7 @@ int main()
 double temperature;
 double temperature_f;
 double prediction;
-char*parameters_file_name="model.csv";
+FILE*parameters_file_name;
 mlearning_column_vec_double*c_vector;
 mlearning_row_vec_double*r_vector;
 mlearning_column_vec_double*prediction_vector;
@@ -15,10 +15,17 @@ printf("Enter temperature :");
 scanf("%lf",&temperature);
 fflush(stdin);
 temperature_f=(temperature*9.0/5.0)+32.0;
-c_vector=mlearning_column_vec_double_from_csv(parameters_file_name);
+parameters_file_name=fopen("IceCreamSales_model.csv","r");
+if(parameters_file_name==NULL)
+{
+printf("Unable to load model.csv\n");
+return 0;
+}
+c_vector=mlearning_column_vec_double_from_csv("IceCreamSales_model.csv");
 if(c_vector==NULL)
 {
 printf("Low memory\n");
+fclose(parameters_file_name);
 return 0;
 }
 r_vector=mlearning_row_vec_double_create_new(2);
@@ -39,5 +46,6 @@ return 0;
 }
 prediction=mlearning_column_vec_double_get(prediction_vector,0);
 printf("\nPredicted profit in USD is :   %lf\n",prediction);
+fclose(parameters_file_name);
 return 0;
 }
