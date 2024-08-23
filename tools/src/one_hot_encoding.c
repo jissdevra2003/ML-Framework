@@ -35,13 +35,14 @@ for(i=0;columns_string[i]!='\0';i++)
 {
 if(columns_string[i]==',') size++;
 }
+size++;
+
 encode_columns=(int*)malloc(sizeof(int)*size);
 if(encode_columns==NULL)
 {
 printf("Low memory\n");
 return 0;
 }
-size++;
 i=0;
 s=columns_string;
 while(1)
