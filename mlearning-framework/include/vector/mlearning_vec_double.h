@@ -13,11 +13,11 @@ double mlearning_column_vec_double_get(mlearning_column_vec_double*vector,index_
 void mlearning_column_vec_double_set(mlearning_column_vec_double*vector,index_t index,double value);
 
 mlearning_column_vec_double*mlearning_column_vec_double_create_new_filled(dimension_t size,double value);
-mlearning_row_vec_double*mlearning_column_vec_double_transpose(mlearning_column_vec_double*vector);
+mlearning_row_vec_double*mlearning_column_vec_double_transpose(mlearning_column_vec_double*vector,mlearning_row_vec_double*transposed_vector);
 dimension_t mlearning_column_vec_double_get_size(mlearning_column_vec_double*vector);
 double mlearning_column_vec_double_get_mean(mlearning_column_vec_double*vector);
 void mlearning_column_vec_double_to_csv(mlearning_column_vec_double*vector,char*csv_file);
-mlearning_column_vec_double * mlearning_column_vec_double_from_csv(char*csv_file);
+mlearning_column_vec_double * mlearning_column_vec_double_from_csv(char*csv_file,mlearning_column_vec_double*vector);
 
 
 
@@ -29,10 +29,10 @@ double mlearning_row_vec_double_get(mlearning_row_vec_double*vector,index_t inde
 void mlearning_row_vec_double_set(mlearning_row_vec_double*vector,index_t index,double value);
 
 mlearning_row_vec_double*mlearning_row_vec_double_create_new_filled(dimension_t size,double value);
-mlearning_column_vec_double*mlearning_row_vec_double_transpose(mlearning_row_vec_double*vector);
+mlearning_column_vec_double*mlearning_row_vec_double_transpose(mlearning_row_vec_double*vector,mlearning_column_vec_double*transposed_vector);
 dimension_t mlearning_row_vec_double_get_size(mlearning_row_vec_double*vector);
 double mlearning_row_vec_double_get_mean(mlearning_row_vec_double*vector);
 void mlearning_row_vec_double_to_csv(mlearning_row_vec_double*vector,char*csv_file);
-mlearning_row_vec_double * mlearning_row_vec_double_from_csv(char*csv_file);
+mlearning_row_vec_double * mlearning_row_vec_double_from_csv(char*csv_file,mlearning_row_vec_double*vector);
 
 #endif

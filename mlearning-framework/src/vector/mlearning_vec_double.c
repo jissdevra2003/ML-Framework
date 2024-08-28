@@ -62,13 +62,21 @@ vector->data[r]=value;
 }
 return vector;
 }
-mlearning_row_vec_double*mlearning_column_vec_double_transpose(mlearning_column_vec_double*vector)
+mlearning_row_vec_double*mlearning_column_vec_double_transpose(mlearning_column_vec_double*vector,mlearning_row_vec_double*transposed_vector)
 {
 if(vector==NULL) return NULL;
 index_t r;
-mlearning_row_vec_double*transposed_vector;
+
+if(transposed_vector==NULL)
+{
 transposed_vector=mlearning_row_vec_double_create_new(vector->size);
 if(transposed_vector==NULL) return NULL;
+}
+else 
+{
+if(transposed_vector->size!=vector->size) return NULL;
+}
+
 for(r=0;r<vector->size;r++)
 {
 transposed_vector->data[r]=vector->data[r];
@@ -111,9 +119,8 @@ else fputc(',',file);
 }
 fclose(file);
 }
-mlearning_column_vec_double * mlearning_column_vec_double_from_csv(char*csv_file)
+mlearning_column_vec_double * mlearning_column_vec_double_from_csv(char*csv_file,mlearning_column_vec_double*vector)
 {
-mlearning_column_vec_double*vector;
 index_t j;
 int index;
 char m;
@@ -132,12 +139,21 @@ if(feof(file)) break;
 if(m==',') size++;
 }
 size++;
+
+if(vector==NULL)
+{
 vector=mlearning_column_vec_double_create_new(size);
 if(vector==NULL)
 {
 fclose(file);
 return NULL;
 }
+}
+else 
+{
+if(vector->size!=size) return NULL;
+}
+
 
 rewind(file);
 j=0;
@@ -215,13 +231,21 @@ vector->data[r]=value;
 }
 return vector;
 }
-mlearning_column_vec_double*mlearning_row_vec_double_transpose(mlearning_row_vec_double*vector)
+mlearning_column_vec_double*mlearning_row_vec_double_transpose(mlearning_row_vec_double*vector,mlearning_column_vec_double*transposed_vector)
 {
 if(vector==NULL) return NULL;
 index_t r;
-mlearning_column_vec_double*transposed_vector;
+
+if(transposed_vector==NULL)
+{
 transposed_vector=mlearning_column_vec_double_create_new(vector->size);
 if(transposed_vector==NULL) return NULL;
+}
+else 
+{
+if(transposed_vector->size!=vector->size) return NULL;
+}
+
 for(r=0;r<vector->size;r++)
 {
 transposed_vector->data[r]=vector->data[r];
@@ -265,9 +289,8 @@ fclose(file);
 }
 
 
-mlearning_row_vec_double * mlearning_row_vec_double_from_csv(char*csv_file)
+mlearning_row_vec_double * mlearning_row_vec_double_from_csv(char*csv_file,mlearning_row_vec_double*vector)
 {
-mlearning_row_vec_double*vector;
 index_t j;
 int index;
 char m;
@@ -286,12 +309,21 @@ if(feof(file)) break;
 if(m==',') size++;
 }
 size++;
+
+if(vector==NULL)
+{
 vector=mlearning_row_vec_double_create_new(size);
 if(vector==NULL)
 {
 fclose(file);
 return NULL;
 }
+}
+else 
+{
+if(vector->size!=size) return NULL;
+}
+
 
 rewind(file);
 j=0;

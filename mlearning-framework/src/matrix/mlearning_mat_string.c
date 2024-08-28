@@ -133,6 +133,28 @@ fclose(file);
 return matrix;
 }
 
+void mlearning_mat_string_to_csv(mlearning_mat_string*matrix,const char*csv_file_name)
+{
+FILE*file;
+index_t r,c;
+if(matrix==NULL) return;
+if(csv_file_name==NULL) return;
+file=fopen(csv_file_name,"w");
+if(file==NULL) return;
+for(r=0;r<matrix->rows;r++)
+{
+for(c=0;c<matrix->columns;c++)
+{
+if(matrix->data[r][c]!=NULL) fputs(matrix->data[r][c],file);
+if(c<matrix->columns-1) fputc(',',file);
+else fputc('\n',file);
+}
+
+}
+fclose(file);
+
+}
+
 void mlearning_mat_string_get(mlearning_mat_string*matrix,index_t row,index_t column,char**string)
 {
 if(matrix==NULL) return;

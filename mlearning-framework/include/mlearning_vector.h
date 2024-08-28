@@ -7,5 +7,6 @@
 typedef uint32_t dimension_t;
 typedef uint32_t index_t;
 #endif 
+#include<vector\mlearning_vec_string.h>
 #include<vector\mlearning_vec_double.h>
 #endif

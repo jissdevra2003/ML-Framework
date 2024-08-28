@@ -58,9 +58,8 @@ matrix->rows=rows;
 matrix->columns=columns;
 return matrix;
 }
-mlearning_mat_double * mlearning_mat_double_from_csv(const char*csv_file_name)
+mlearning_mat_double * mlearning_mat_double_from_csv(const char*csv_file_name,mlearning_mat_double*matrix)
 {
-mlearning_mat_double*matrix;
 dimension_t rows,columns;
 index_t r,c;
 int index;
@@ -85,12 +84,20 @@ if(m=='\n') rows++;
 }
 columns++;
 
+if(matrix==NULL)
+{
 matrix=mlearning_mat_double_create_new(rows,columns);
 if(matrix==NULL)
 {
 fclose(file);
 return NULL;
 }
+}
+else 
+{
+if(matrix->rows!=rows || matrix->columns!=columns) return NULL;
+}
+
 rewind(file);  //take the internal pointer to the first byte of file
 index=0;
 r=0;
@@ -216,14 +223,23 @@ matrix->data[r][c]=value;
 }
 }
 
-mlearning_column_vec_double*mlearning_mat_double_create_column_vec(mlearning_mat_double*matrix,index_t column_index)
+mlearning_column_vec_double*mlearning_mat_double_create_column_vec(mlearning_mat_double*matrix,index_t column_index,mlearning_column_vec_double*vector)
 {
 index_t r;
 if(matrix==NULL) return NULL;
 if(column_index<0 || column_index>=matrix->columns) return NULL;
-mlearning_column_vec_double*vector;
+
+if(vector==NULL)
+{
 vector=mlearning_column_vec_double_create_new(matrix->rows);
 if(vector==NULL) return NULL;
+}
+else 
+{
+if(mlearning_column_vec_double_get_size(vector)!=matrix->rows) return NULL;
+}
+
+
 for(r=0;r<matrix->rows;r++)
 {
 mlearning_column_vec_double_set(vector,r,matrix->data[r][column_index]);
@@ -231,9 +247,8 @@ mlearning_column_vec_double_set(vector,r,matrix->data[r][column_index]);
 return vector;
 }
 
-mlearning_mat_double* mlearning_mat_double_shuffle(mlearning_mat_double*matrix,uint8_t shuffle_count)
+mlearning_mat_double* mlearning_mat_double_shuffle(mlearning_mat_double*matrix,uint8_t shuffle_count,mlearning_mat_double*shuffled_matrix)
 {
-mlearning_mat_double*shuffled_matrix;
 index_t u,idx;
 index_t a,b;
 index_t end_at_index;
@@ -243,8 +258,17 @@ uint8_t j;
 int r;
 if(matrix==NULL) return NULL;
 if(shuffle_count==0) return NULL;
+
+if(shuffled_matrix==NULL)
+{
 shuffled_matrix=mlearning_mat_double_create_new(matrix->rows,matrix->columns);
 if(shuffled_matrix==NULL) return NULL;
+}
+else 
+{
+if(shuffled_matrix->rows!=matrix->rows || shuffled_matrix->columns!=matrix->columns) return NULL;
+}
+
 mlearning_mat_double_copy(shuffled_matrix,matrix,0,0,0,0,matrix->rows-1,matrix->columns-1);
 b=shuffled_matrix->rows-1;
 end_at_index=shuffled_matrix->rows-3;
@@ -296,13 +320,21 @@ fputc(seperator,file);
 fclose(file);
 }
 
-mlearning_mat_double*mlearning_mat_double_transpose(mlearning_mat_double*matrix)
+mlearning_mat_double*mlearning_mat_double_transpose(mlearning_mat_double*matrix,mlearning_mat_double*transposed_matrix)
 {
-mlearning_mat_double*transposed_matrix;
 index_t r,c;
 if(matrix==NULL) return NULL;
+
+if(transposed_matrix==NULL)
+{
 transposed_matrix=mlearning_mat_double_create_new(matrix->columns,matrix->rows);
 if(transposed_matrix==NULL) return NULL;
+}
+else 
+{
+if(transposed_matrix->rows!=matrix->columns || transposed_matrix->columns!=matrix->rows) return NULL;
+}
+
 for(r=0;r<matrix->rows;r++)
 {
 for(c=0;c<matrix->columns;c++)

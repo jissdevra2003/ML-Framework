@@ -11,9 +11,12 @@ int main()
 mlearning_row_vec_double*r_vec;
 mlearning_column_vec_double*c_vec;
 mlearning_mat_double*min_max_matrix;
-double prediction;
-//double unscaled_prediction;
+double scaled_prediction;
+double prediction;  //unscaled_prediction
+// index_t i;
+// dimension_t c_vec_size;
 mlearning_column_vec_double*prediction_vector;
+double min,max;
 double age;
 char gender;
 double bmi;
@@ -25,6 +28,7 @@ char region3[15]="northwest";
 char region4[15]="northeast";
 char*region;
 mlearning_row_vec_double*scaled_r_vec;
+dimension_t min_max_rows,min_max_columns;
 
 
 
@@ -150,11 +154,11 @@ mlearning_row_vec_double_set(r_vec,8,0);
 mlearning_row_vec_double_set(r_vec,9,0);
 mlearning_row_vec_double_set(r_vec,10,0);
 }
-//for testing contents of r_vec
-// r_vec_size=mlearning_row_vec_double_get_size(r_vec);
-// for(i=0;i<r_vec_size;i++)
+//for testing contents of c_vec
+// c_vec_size=mlearning_column_vec_double_get_size(c_vec);
+// for(i=0;i<c_vec_size;i++)
 // {
-// printf("%lf , ",mlearning_row_vec_double_get(r_vec,i));
+// printf("%lf , ",mlearning_column_vec_double_get(c_vec,i));
 // }
 min_max_matrix=mlearning_mat_double_from_csv("min_max.csv");
 if(min_max_matrix==NULL)
@@ -165,6 +169,7 @@ mlearning_row_vec_double_destroy(r_vec);
 mlearning_column_vec_double_destroy(c_vec);
 return 0;
 }
+mlearning_mat_double_get_dimensions(min_max_matrix,&min_max_rows,&min_max_columns);
 scaled_r_vec=mlearning_scale_row_vec_double_with_given_min_max(r_vec,0,11,min_max_matrix);
 if(scaled_r_vec==NULL)
 {
@@ -192,8 +197,18 @@ mlearning_mat_double_destroy(min_max_matrix);
 mlearning_row_vec_double_destroy(scaled_r_vec);
 return 0;
 }
-prediction=mlearning_column_vec_double_get(prediction_vector,0);
-printf("Predicted charges is %lf",prediction);
+scaled_prediction=mlearning_column_vec_double_get(prediction_vector,0);
+min=mlearning_mat_double_get(min_max_matrix,0,0);
+max=mlearning_mat_double_get(min_max_matrix,1,0);
+prediction=(scaled_prediction*(max-min))+min;
+printf("Predicted(scaled) charges is %lf",prediction);
 fclose(parameters_file_name);
+
+free(region);
+mlearning_row_vec_double_destroy(r_vec);
+mlearning_column_vec_double_destroy(c_vec);
+mlearning_mat_double_destroy(min_max_matrix);
+mlearning_row_vec_double_destroy(scaled_r_vec);
+mlearning_column_vec_double_destroy(prediction_vector);
 return 0;
 }
