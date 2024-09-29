@@ -1,6 +1,7 @@
 #include<mlearning_set.h>
 #include<mlearning_matrix.h>
 #include<mlearning_encoder.h>
+<<<<<<< HEAD
 #include<mlearning_utils.h>
 #include<stdio.h>
 #include<stdlib.h>
@@ -10,19 +11,31 @@ void mlearning_encoder_encode_one_hot(char*source,char*target,mlearning_row_vec_
 int*encode_columns;
 dimension_t size;
 char *ptr1,*ptr2;
+=======
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+void mlearning_encoder_encode_one_hot(char*source,char*target,int*encode_columns,int size,int header_exists)
+{
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 mlearning_mat_string*matrix;
 mlearning_set_string**sets;
 FILE*target_file;
 char*set_string;
 index_t i,j,c,r;
+<<<<<<< HEAD
 int found;
 dimension_t header_size;
 index_t data_start_row_index;
 mlearning_row_vec_string*header;
+=======
+index_t data_start_row_index;
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 char *string;
 dimension_t matrix_rows,matrix_columns;
 dimension_t set_size;
 
+<<<<<<< HEAD
 if(source==NULL || target==NULL || encode_columns_vector==NULL) return;
 
 matrix=mlearning_mat_string_from_csv(source,NULL,&header);  //actual header from the csv file
@@ -81,6 +94,12 @@ encode_columns[i]=j;
 
 
 
+=======
+if(source==NULL || target==NULL || size<=0 || encode_columns==NULL) return;
+
+matrix=mlearning_mat_string_from_csv(source);
+if(matrix==NULL) return;
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 mlearning_mat_string_get_dimensions(matrix,&matrix_rows,&matrix_columns);
 for(i=0;i<size;i++)
 {
@@ -88,17 +107,23 @@ c=encode_columns[i];
 if(c<0 || c>=matrix_columns)
 {
 mlearning_mat_string_destroy(matrix);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(header);
 free(encode_columns);
 return;
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 }
 }
 sets=(mlearning_set_string**)malloc(sizeof(mlearning_set_string*)*size);
 if(sets==NULL)
 {
 mlearning_mat_string_destroy(matrix);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(header);
 free(encode_columns);
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 return;
 }
 for(i=0;i<size;i++)
@@ -112,12 +137,20 @@ mlearning_set_string_destroy(sets[j]);
 }
 free(sets);
 mlearning_mat_string_destroy(matrix);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(header);
 free(encode_columns);
 return;
 }
 }
 data_start_row_index=0;
+=======
+return;
+}
+}
+if(header_exists) data_start_row_index=1;
+else data_start_row_index=0;
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 
 for(r=data_start_row_index;r<matrix_rows;r++)
 {
@@ -133,8 +166,11 @@ mlearning_set_string_destroy(sets[j]);
 }
 free(sets);
 mlearning_mat_string_destroy(matrix);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(header);
 free(encode_columns);
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 return;
 }
 else 
@@ -148,8 +184,11 @@ mlearning_set_string_destroy(sets[j]);
 }
 free(sets);
 mlearning_mat_string_destroy(matrix);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(header);
 free(encode_columns);
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 return;
 }
 free(string);
@@ -157,13 +196,17 @@ free(string);
 }
 }
 
+<<<<<<< HEAD
 //logic to write the target file
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 target_file=fopen(target,"w");
 if(target_file==NULL)
 {
 for(i=0;i<size;i++) mlearning_set_string_destroy(sets[i]);
 free(sets);
 mlearning_mat_string_destroy(matrix);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(header);
 free(encode_columns);
 return;
@@ -172,14 +215,27 @@ return;
 for(c=0;c<header_size;c++)
 {
 mlearning_row_vec_string_get(header,c,&string);
+=======
+return;
+}
+
+if(header_exists)
+{
+for(c=0;c<matrix_columns;c++)
+{
+mlearning_mat_string_get(matrix,0,c,&string);
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 if(string==NULL)
 {
 for(i=0;i<size;i++) mlearning_set_string_destroy(sets[i]);
 free(sets);
 mlearning_mat_string_destroy(matrix);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(header);
 free(encode_columns);
 fclose(target_file);
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 return;
 }
 for(i=0;i<size;i++)
@@ -197,8 +253,11 @@ if(set_string==NULL)
 for(i=0;i<size;i++) mlearning_set_string_destroy(sets[i]);
 free(sets);
 mlearning_mat_string_destroy(matrix);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(header);
 free(encode_columns);
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 fclose(target_file);
 target_file=fopen(target,"w");  //create blank file and destroy
 fclose(target_file);
@@ -219,7 +278,11 @@ free(string);
 if(c==matrix_columns-1) fputc('\n',target_file);
 else fputc(',',target_file);
 }
+<<<<<<< HEAD
 
+=======
+}
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 
 for(r=data_start_row_index;r<matrix_rows;r++)
 {
@@ -231,8 +294,11 @@ if(string==NULL)
 for(i=0;i<size;i++) mlearning_set_string_destroy(sets[i]);
 free(sets);
 mlearning_mat_string_destroy(matrix);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(header);
 free(encode_columns);
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 fclose(target_file);
 target_file=fopen(target,"w");
 fclose(target_file);
@@ -253,8 +319,11 @@ if(set_string==NULL)
 for(i=0;i<size;i++) mlearning_set_string_destroy(sets[i]);
 free(sets);
 mlearning_mat_string_destroy(matrix);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(header);
 free(encode_columns);
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 fclose(target_file);
 target_file=fopen(target,"w");
 fclose(target_file);
@@ -298,6 +367,7 @@ fclose(target_file);
 // }
 // }
 // }
+<<<<<<< HEAD
 for(i=0;i<size;i++) mlearning_set_string_destroy(sets[i]);
 free(sets);
 mlearning_mat_string_destroy(matrix);
@@ -663,3 +733,8 @@ mlearning_encoder_encode_to_binary(source,target,encode_columns_vector);
 }
 
 
+=======
+
+}
+
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca

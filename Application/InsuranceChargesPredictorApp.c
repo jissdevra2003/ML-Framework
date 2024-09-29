@@ -29,7 +29,11 @@ char region4[15]="northeast";
 char*region;
 mlearning_row_vec_double*scaled_r_vec;
 dimension_t min_max_rows,min_max_columns;
+<<<<<<< HEAD
 mlearning_row_vec_string*header;
+=======
+
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 
 
 FILE*parameters_file_name;
@@ -80,12 +84,19 @@ printf("Unable to load Insurance parameters file\n");
 free(region);
 return 0;
 }
+<<<<<<< HEAD
 c_vec=mlearning_column_vec_double_from_csv("Insurance_model.csv",NULL,&header);
+=======
+c_vec=mlearning_column_vec_double_from_csv("Insurance_model.csv");
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 if(c_vec==NULL)
 {
 printf("Low memory\n");
 fclose(parameters_file_name);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(header);
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 free(region);
 return 0;
 }
@@ -95,7 +106,10 @@ if(r_vec==NULL)
 printf("Low memory\n");
 fclose(parameters_file_name);
 mlearning_column_vec_double_destroy(c_vec);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(header);
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 free(region);
 return 0;
 }
@@ -162,24 +176,38 @@ mlearning_row_vec_double_set(r_vec,10,0);
 // {
 // printf("%lf , ",mlearning_column_vec_double_get(c_vec,i));
 // }
+<<<<<<< HEAD
 min_max_matrix=mlearning_mat_double_from_csv("min_max.csv",NULL,&header);
+=======
+min_max_matrix=mlearning_mat_double_from_csv("min_max.csv");
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 if(min_max_matrix==NULL)
 {
 printf("Low memory\n");
 free(region);
 mlearning_row_vec_double_destroy(r_vec);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(header);
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 mlearning_column_vec_double_destroy(c_vec);
 return 0;
 }
 mlearning_mat_double_get_dimensions(min_max_matrix,&min_max_rows,&min_max_columns);
+<<<<<<< HEAD
 scaled_r_vec=mlearning_scale_row_vec_double_with_given_min_max(r_vec,0,11,min_max_matrix,NULL);
+=======
+scaled_r_vec=mlearning_scale_row_vec_double_with_given_min_max(r_vec,0,11,min_max_matrix);
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 if(scaled_r_vec==NULL)
 {
 printf("Low memory\n");
 free(region);
 mlearning_row_vec_double_destroy(r_vec);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(header);
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 mlearning_column_vec_double_destroy(c_vec);
 mlearning_mat_double_destroy(min_max_matrix);
 return 0;
@@ -190,14 +218,21 @@ return 0;
 //  {
 //  printf("%lf , ",mlearning_row_vec_double_get(scaled_r_vec,i));
 //  }
+<<<<<<< HEAD
 prediction_vector=mlearning_multiply_double_row_vector_with_column_vector(scaled_r_vec,c_vec,NULL);
+=======
+prediction_vector=mlearning_multiply_double_row_vector_with_column_vector(scaled_r_vec,c_vec);
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 if(prediction_vector==NULL)
 {
 printf("Low memory\n");
 free(region);
 mlearning_row_vec_double_destroy(r_vec);
 mlearning_column_vec_double_destroy(c_vec);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(header);
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 mlearning_mat_double_destroy(min_max_matrix);
 mlearning_row_vec_double_destroy(scaled_r_vec);
 return 0;
@@ -206,12 +241,19 @@ scaled_prediction=mlearning_column_vec_double_get(prediction_vector,0);
 min=mlearning_mat_double_get(min_max_matrix,0,0);
 max=mlearning_mat_double_get(min_max_matrix,1,0);
 prediction=(scaled_prediction*(max-min))+min;
+<<<<<<< HEAD
 printf("Predicted charges is %lf",prediction);
+=======
+printf("Predicted(scaled) charges is %lf",prediction);
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 fclose(parameters_file_name);
 
 free(region);
 mlearning_row_vec_double_destroy(r_vec);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(header);
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 mlearning_column_vec_double_destroy(c_vec);
 mlearning_mat_double_destroy(min_max_matrix);
 mlearning_row_vec_double_destroy(scaled_r_vec);

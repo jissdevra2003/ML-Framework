@@ -2,7 +2,11 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+<<<<<<< HEAD
 #include<time.h>
+=======
+
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 typedef struct __mlearning_mat_string
 {
 char***data;
@@ -66,17 +70,25 @@ free(matrix->data);
 free(matrix);
 }
 
+<<<<<<< HEAD
 mlearning_mat_string * mlearning_mat_string_from_csv(const char*csv_file_name,mlearning_mat_string*matrix,mlearning_row_vec_string**header)
 {
 index_t r,c;
 dimension_t header_size;
 index_t header_index;
 char header_string[1507];
+=======
+mlearning_mat_string * mlearning_mat_string_from_csv(const char*csv_file_name)
+{
+mlearning_mat_string*matrix;
+index_t r,c;
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 dimension_t rows,columns;
 char m;
 int index;
 char string[7021];
 FILE*file;
+<<<<<<< HEAD
 if(csv_file_name==NULL || header==NULL) return NULL;
 file=fopen(csv_file_name,"r");
 if(file==NULL) return NULL;
@@ -125,13 +137,21 @@ index++;
 
 
 
+=======
+if(csv_file_name==NULL) return NULL;
+file=fopen(csv_file_name,"r");
+if(file==NULL) return NULL;
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 rows=0;
 columns=0;
 while(1)
 {
 m=fgetc(file);
 if(feof(file)) break;
+<<<<<<< HEAD
 if(m=='\r') continue;
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 if(rows==0)
 {
 if(m==',') columns++;
@@ -139,6 +159,7 @@ if(m==',') columns++;
 if(m=='\n') rows++;
 }
 columns++;
+<<<<<<< HEAD
 if(columns!=header_size)
 {
 mlearning_row_vec_string_destroy(*header);
@@ -148,10 +169,14 @@ return NULL;
 }
 if(matrix==NULL)
 {
+=======
+
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 matrix=mlearning_mat_string_create_new(rows,columns);
 if(matrix==NULL)
 {
 fclose(file);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(*header);
 *header=NULL;
 return NULL;
@@ -179,6 +204,11 @@ if(m=='\r') continue;
 if(m=='\n') break;
 }
 
+=======
+return NULL;
+}
+rewind(file);
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 r=0;
 c=0;
 index=0;
@@ -186,7 +216,10 @@ while(1)
 {
 m=fgetc(file);
 if(feof(file)) break;
+<<<<<<< HEAD
 if(m=='\r') continue;
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 if(m==',' || m=='\n')
 {
 string[index]='\0';
@@ -214,6 +247,7 @@ fclose(file);
 return matrix;
 }
 
+<<<<<<< HEAD
 void mlearning_mat_string_to_csv(mlearning_mat_string*matrix,const char*csv_file_name,mlearning_row_vec_string*header)
 {
 FILE*file;
@@ -245,6 +279,16 @@ else fputc('\n',file);
 
 
 
+=======
+void mlearning_mat_string_to_csv(mlearning_mat_string*matrix,const char*csv_file_name)
+{
+FILE*file;
+index_t r,c;
+if(matrix==NULL) return;
+if(csv_file_name==NULL) return;
+file=fopen(csv_file_name,"w");
+if(file==NULL) return;
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 for(r=0;r<matrix->rows;r++)
 {
 for(c=0;c<matrix->columns;c++)
@@ -304,6 +348,7 @@ if(columns!=NULL)
 {
 *columns=matrix->columns;
 }
+<<<<<<< HEAD
 }
 mlearning_mat_string*mlearning_mat_string_transpose(mlearning_mat_string*matrix,mlearning_mat_string*transposed_matrix)
 {
@@ -420,4 +465,6 @@ shuffled_matrix->data[idx][c]=tmp_value;
 }
 }
 return shuffled_matrix;
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 }

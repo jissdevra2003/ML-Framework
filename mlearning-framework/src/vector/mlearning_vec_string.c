@@ -44,6 +44,7 @@ for(i=0;i<size;i++) vector->data[i]=NULL;
 vector->size=size;
 return vector;
 }
+<<<<<<< HEAD
 mlearning_row_vec_string * mlearning_row_vec_string_from_csv(const char* csv_file_name,mlearning_row_vec_string*vector,mlearning_row_vec_string**header)
 {
 index_t i;
@@ -56,11 +57,24 @@ char m;
 dimension_t size;
 FILE*file;
 if(csv_file_name==NULL || header==NULL) return NULL;
+=======
+mlearning_row_vec_string * mlearning_row_vec_string_from_csv(const char* csv_file_name)
+{
+index_t i;
+int index;
+char string[5021];
+char m;
+dimension_t size;
+mlearning_row_vec_string*vector;
+FILE*file;
+if(csv_file_name==NULL) return NULL;
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 file=fopen(csv_file_name,"r");
 if(file==NULL)
 {
 return NULL;
 }
+<<<<<<< HEAD
 
 //logic to read the header line from file
 header_size=0;
@@ -106,11 +120,14 @@ index++;
 
 
 
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 size=0;
 while(1)
 {
 m=fgetc(file);
 if(feof(file)) break;
+<<<<<<< HEAD
 if(m=='\r') continue;
 if(m==',') size++;
 }
@@ -124,10 +141,16 @@ return NULL;
 }
 if(vector==NULL)
 {
+=======
+if(m==',') size++;
+}
+size++;
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 vector=mlearning_row_vec_string_create_new(size);
 if(vector==NULL)
 {
 fclose(file);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(*header);
 *header=NULL;
 return NULL;
@@ -156,11 +179,21 @@ if(m=='\n') break;
 index=0;
 i=0;
 //populating the data into vector
+=======
+return NULL;
+}
+index=0;
+i=0;
+rewind(file);
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 while(1)
 {
 m=fgetc(file);
 if(feof(file)) break;
+<<<<<<< HEAD
 if(m=='\r') continue;
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 if(m==',' || m=='\n')
 {
 string[index]='\0';
@@ -177,6 +210,7 @@ index++;
 fclose(file);
 return vector;
 }
+<<<<<<< HEAD
 void mlearning_row_vec_string_to_csv(mlearning_row_vec_string*vector,const char*csv_file_name,mlearning_row_vec_string*header)
 {
 char*ptr;
@@ -207,6 +241,16 @@ else fputc('\n',file);
 
 
 
+=======
+void mlearning_row_vec_string_to_csv(mlearning_row_vec_string*vector,const char*csv_file_name)
+{
+FILE*file;
+index_t i; 
+if(vector==NULL) return;
+if(csv_file_name==NULL) return;
+file=fopen(csv_file_name,"w");
+if(file==NULL) return;
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 for(i=0;i<vector->size;i++)
 {
 if(vector->data[i]!=NULL) fputs(vector->data[i],file); 
@@ -256,6 +300,7 @@ dimension_t mlearning_row_vec_string_get_size(mlearning_row_vec_string*vector)
 if(vector==NULL) return 0;
 return vector->size;
 }
+<<<<<<< HEAD
 mlearning_column_vec_string*mlearning_row_vec_string_transpose(mlearning_row_vec_string*vector,mlearning_column_vec_string*transposed_vector)
 {
 index_t i;
@@ -273,6 +318,16 @@ if(transposed_vector->size!=vector->size) return NULL;
 }
 
 
+=======
+mlearning_column_vec_string*mlearning_row_vec_string_transpose(mlearning_row_vec_string*vector)
+{
+index_t i;
+char*str;
+mlearning_column_vec_string*transposed_vector;
+if(vector==NULL) return NULL;
+transposed_vector=mlearning_column_vec_string_create_new(vector->size);
+if(transposed_vector==NULL) return NULL;
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 for(i=0;i<vector->size;i++)
 {
 mlearning_row_vec_string_get(vector,i,&str);
@@ -313,6 +368,7 @@ for(i=0;i<size;i++) vector->data[i]=NULL;
 vector->size=size;
 return vector;
 }
+<<<<<<< HEAD
 mlearning_column_vec_string * mlearning_column_vec_string_from_csv(const char* csv_file_name,mlearning_column_vec_string*vector,mlearning_row_vec_string**header)
 {
 index_t i;
@@ -325,11 +381,24 @@ char m;
 dimension_t size;
 FILE*file;
 if(csv_file_name==NULL || header==NULL) return NULL;
+=======
+mlearning_column_vec_string * mlearning_column_vec_string_from_csv(const char* csv_file_name)
+{
+index_t i;
+int index;
+char string[5021];
+char m;
+dimension_t size;
+mlearning_column_vec_string*vector;
+FILE*file;
+if(csv_file_name==NULL) return NULL;
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 file=fopen(csv_file_name,"r");
 if(file==NULL)
 {
 return NULL;
 }
+<<<<<<< HEAD
 
 //logic to read the header line from file
 header_size=0;
@@ -379,11 +448,14 @@ index++;
 //logic to read the header line ends
 
 
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 size=0;
 while(1)
 {
 m=fgetc(file);
 if(feof(file)) break;
+<<<<<<< HEAD
 if(m=='\r') continue;
 if(m==',') size++;
 }
@@ -391,10 +463,16 @@ size++;
 
 if(vector==NULL)
 {
+=======
+if(m==',') size++;
+}
+size++;
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 vector=mlearning_column_vec_string_create_new(size);
 if(vector==NULL)
 {
 fclose(file);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(*header);
 *header=NULL;
 return NULL;
@@ -424,11 +502,21 @@ if(m=='\n') break;
 
 index=0;
 i=0;
+=======
+return NULL;
+}
+index=0;
+i=0;
+rewind(file);
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 while(1)
 {
 m=fgetc(file);
 if(feof(file)) break;
+<<<<<<< HEAD
 if(m=='\r') continue;
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 if(m==',' || m=='\n')
 {
 string[index]='\0';
@@ -445,6 +533,7 @@ index++;
 fclose(file);
 return vector;
 }
+<<<<<<< HEAD
 void mlearning_column_vec_string_to_csv(mlearning_column_vec_string*vector,const char*csv_file_name,mlearning_row_vec_string*header)
 {
 dimension_t header_size;
@@ -475,6 +564,16 @@ else fputc('\n',file);
 
 
 
+=======
+void mlearning_column_vec_string_to_csv(mlearning_column_vec_string*vector,const char*csv_file_name)
+{
+FILE*file;
+index_t i;
+if(vector==NULL) return;
+if(csv_file_name==NULL) return;
+file=fopen(csv_file_name,"w");
+if(file==NULL) return;
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 for(i=0;i<vector->size;i++)
 {
 if(vector->data[i]!=NULL) fputs(vector->data[i],file);
@@ -524,6 +623,7 @@ dimension_t mlearning_column_vec_string_get_size(mlearning_column_vec_string*vec
 if(vector==NULL) return 0;
 return vector->size;
 }
+<<<<<<< HEAD
 mlearning_row_vec_string*mlearning_column_vec_string_transpose(mlearning_column_vec_string*vector,mlearning_row_vec_string*transposed_vector)
 {
 index_t i;
@@ -541,6 +641,16 @@ if(transposed_vector->size!=vector->size) return NULL;
 }
 
 
+=======
+mlearning_row_vec_string*mlearning_column_vec_string_transpose(mlearning_column_vec_string*vector)
+{
+index_t i;
+char*str;
+mlearning_row_vec_string*transposed_vector;
+if(vector==NULL) return NULL;
+transposed_vector=mlearning_row_vec_string_create_new(vector->size);
+if(transposed_vector==NULL) return NULL;
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 for(i=0;i<vector->size;i++)
 {
 mlearning_column_vec_string_get(vector,i,&str);

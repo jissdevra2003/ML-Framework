@@ -20,6 +20,7 @@ uint8_t STOP_FLAG=0;
 void train_it()
 {
 FILE*graph_file;
+<<<<<<< HEAD
 char header_title[20];
 mlearning_mat_double*history;
 mlearning_row_vec_string*history_header;
@@ -27,12 +28,21 @@ dimension_t history_rows,history_columns;
 index_t history_index;
 index_t i,j;
 int t;
+=======
+mlearning_mat_double*history;
+dimension_t history_rows,history_columns;
+index_t history_index;
+index_t i,j;
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 double iteration_number;
 double value;
 
 uint64_t k;
 mlearning_mat_double*dataset;
+<<<<<<< HEAD
 mlearning_row_vec_string*dataset_header;
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 dimension_t dataset_rows;
 dimension_t dataset_columns;
 
@@ -42,7 +52,10 @@ dimension_t I_columns;
 
 mlearning_column_vec_double*A;
 mlearning_column_vec_double*m;
+<<<<<<< HEAD
 mlearning_row_vec_string*model_header;
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 mlearning_column_vec_double*P;
 mlearning_column_vec_double*E;
 mlearning_row_vec_double*ET;
@@ -54,7 +67,11 @@ mlearning_column_vec_double*UM;
 double sum_of_squared_error_values=0.0;
 double final_error_value=0.0;
 
+<<<<<<< HEAD
 dataset=mlearning_mat_double_from_csv(DATASET_FILE_NAME,NULL,&dataset_header);
+=======
+dataset=mlearning_mat_double_from_csv(DATASET_FILE_NAME);
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 if(dataset==NULL)
 {
 printf("Unable to load the dataset from %s\n",DATASET_FILE_NAME);
@@ -72,7 +89,10 @@ if(I==NULL)
 {
 printf("Unable to create matrix I\n");
 mlearning_mat_double_destroy(dataset);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(dataset_header);
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 return;
 }
 history_rows=HISTORY_SIZE;
@@ -85,6 +105,7 @@ if(history==NULL)
 printf("Low memory\n");
 mlearning_mat_double_destroy(dataset);
 mlearning_mat_double_destroy(I);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(dataset_header);
 return;
 }
@@ -121,41 +142,66 @@ mlearning_row_vec_string_set(model_header,t-2,header_title);
 t++;
 }
 
+=======
+return;
+}
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 mlearning_mat_double_fill(history,0,0,history_rows-1,history_columns-1,0.0);
 
 mlearning_mat_double_copy(I,dataset,0,1,0,0,dataset_rows-1,dataset_columns-2);
 
 mlearning_mat_double_fill(I,0,0,dataset_rows-1,0,1.0);  //input matrix m 1 fill krna hh
 
+<<<<<<< HEAD
 IT=mlearning_mat_double_transpose(I,NULL);
+=======
+IT=mlearning_mat_double_transpose(I);
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 if(IT==NULL)
 {
 printf("Low memory\n");
 mlearning_mat_double_destroy(dataset);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(dataset_header);
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 mlearning_mat_double_destroy(I);
 mlearning_mat_double_destroy(history);
 return;
 }
 
+<<<<<<< HEAD
 A=mlearning_mat_double_create_column_vec(dataset,dataset_columns-1,NULL);
+=======
+A=mlearning_mat_double_create_column_vec(dataset,dataset_columns-1);
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 if(A==NULL)
 {
 printf("Unable to create column vector A\n");
 mlearning_mat_double_destroy(dataset);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(dataset_header);
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 mlearning_mat_double_destroy(I);
 mlearning_mat_double_destroy(history);
 mlearning_mat_double_destroy(IT);
 return;
 }
 
+<<<<<<< HEAD
 m=mlearning_column_vec_double_create_new_filled(I_columns,0.0,NULL);  // 'm' column vector
+=======
+m=mlearning_column_vec_double_create_new_filled(I_columns,0.0);  // 'm' column vector
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 if(m==NULL)
 {
 printf("Unable to create column vector m\n");
 mlearning_mat_double_destroy(dataset);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(dataset_header);
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 mlearning_mat_double_destroy(I);
 mlearning_mat_double_destroy(history);
 mlearning_mat_double_destroy(IT);
@@ -171,45 +217,72 @@ k=1;
 while(STOP_FLAG==0)
 {
 if(k==(NUMBER_OF_ITERATIONS+1)) break;
+<<<<<<< HEAD
 P=mlearning_multiply_double_matrix_with_column_vector(I,m,NULL);
+=======
+P=mlearning_multiply_double_matrix_with_column_vector(I,m);
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 if(P==NULL)
 {
 printf("Unable to create column vector P\n");
 mlearning_mat_double_destroy(dataset);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(dataset_header);
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 mlearning_mat_double_destroy(I);
 mlearning_mat_double_destroy(history);
 mlearning_mat_double_destroy(IT);
 mlearning_column_vec_double_destroy(A);
 mlearning_column_vec_double_destroy(m);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(history_header);
 mlearning_row_vec_string_destroy(model_header);
 return;
 }
 
 E=mlearning_subtract_double_column_vector(P,A,NULL);
+=======
+return;
+}
+
+E=mlearning_subtract_double_column_vector(P,A);
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 if(E==NULL)
 {
 printf("Unable to create column vector E\n");
 mlearning_mat_double_destroy(dataset);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(dataset_header);
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 mlearning_mat_double_destroy(I);
 mlearning_mat_double_destroy(history);
 mlearning_mat_double_destroy(IT);
 mlearning_column_vec_double_destroy(A);
 mlearning_column_vec_double_destroy(P);
 mlearning_column_vec_double_destroy(m);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(history_header);
 mlearning_row_vec_string_destroy(model_header);
 return;
 }
 
 ET=mlearning_column_vec_double_transpose(E,NULL);
+=======
+return;
+}
+
+ET=mlearning_column_vec_double_transpose(E);
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 if(ET==NULL)
 {
 printf("Unable to create row vector ET\n");
 mlearning_mat_double_destroy(dataset);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(dataset_header);
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 mlearning_mat_double_destroy(I);
 mlearning_mat_double_destroy(history);
 mlearning_mat_double_destroy(IT);
@@ -217,17 +290,27 @@ mlearning_column_vec_double_destroy(A);
 mlearning_column_vec_double_destroy(P);
 mlearning_column_vec_double_destroy(m);
 mlearning_column_vec_double_destroy(E);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(history_header);
 mlearning_row_vec_string_destroy(model_header);
 return;
 }
 
 ETE=mlearning_multiply_double_row_vector_with_column_vector(ET,E,NULL);
+=======
+return;
+}
+
+ETE=mlearning_multiply_double_row_vector_with_column_vector(ET,E);
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 if(ETE==NULL)
 {
 printf("Unable to create column vector ETE\n");
 mlearning_mat_double_destroy(dataset);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(dataset_header);
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 mlearning_mat_double_destroy(I);
 mlearning_mat_double_destroy(history);
 mlearning_mat_double_destroy(IT);
@@ -236,8 +319,11 @@ mlearning_column_vec_double_destroy(P);
 mlearning_column_vec_double_destroy(m);
 mlearning_column_vec_double_destroy(E);
 mlearning_row_vec_double_destroy(ET);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(history_header);
 mlearning_row_vec_string_destroy(model_header);
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 return;
 }
 
@@ -278,12 +364,19 @@ history_index++;
 
 //logic to update m & c values technically our m column vector.
 //ITE=E^i x x^i
+<<<<<<< HEAD
 ITE=mlearning_multiply_double_matrix_with_column_vector(IT,E,NULL);   
+=======
+ITE=mlearning_multiply_double_matrix_with_column_vector(IT,E);   
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 if(ITE==NULL)
 {
 printf("Low memory\n");
 mlearning_mat_double_destroy(dataset);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(dataset_header);
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 mlearning_mat_double_destroy(I);
 mlearning_mat_double_destroy(history);
 mlearning_mat_double_destroy(IT);
@@ -292,17 +385,27 @@ mlearning_column_vec_double_destroy(P);
 mlearning_column_vec_double_destroy(m);
 mlearning_column_vec_double_destroy(E);
 mlearning_row_vec_double_destroy(ET);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(history_header);
 mlearning_row_vec_string_destroy(model_header);
 return;
 }
 //TMP=(1/n)*ITE
 TMP=mlearning_multiply_double_scalar_with_column_vector((LEARNING_RATE*(1.0/I_rows)),ITE,NULL);  
+=======
+return;
+}
+//TMP=(1/n)*ITE
+TMP=mlearning_multiply_double_scalar_with_column_vector((LEARNING_RATE*(1.0/I_rows)),ITE);  
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 if(TMP==NULL)
 {
 printf("Low memory\n");
 mlearning_mat_double_destroy(dataset);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(dataset_header);
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 mlearning_mat_double_destroy(I);
 mlearning_mat_double_destroy(history);
 mlearning_mat_double_destroy(IT);
@@ -312,17 +415,27 @@ mlearning_column_vec_double_destroy(m);
 mlearning_column_vec_double_destroy(E);
 mlearning_row_vec_double_destroy(ET);
 mlearning_column_vec_double_destroy(ITE); 
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(history_header);
 mlearning_row_vec_string_destroy(model_header);
 return;
 }
 // m^i=m^i - 1/n(E^i x x^i) where i=0,1,2,3...n (i is no. of rows)
 UM=mlearning_subtract_double_column_vector(m,TMP,NULL); 
+=======
+return;
+}
+// m^i=m^i - 1/n(E^i x x^i) where i=0,1,2,3...n (i is no. of rows)
+UM=mlearning_subtract_double_column_vector(m,TMP); 
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 if(UM==NULL)
 {
 printf("Low memory\n");
 mlearning_mat_double_destroy(dataset);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(dataset_header);
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 mlearning_mat_double_destroy(I);
 mlearning_mat_double_destroy(history);
 mlearning_mat_double_destroy(IT);
@@ -333,8 +446,11 @@ mlearning_column_vec_double_destroy(E);
 mlearning_row_vec_double_destroy(ET);
 mlearning_column_vec_double_destroy(ITE); 
 mlearning_column_vec_double_destroy(TMP);
+<<<<<<< HEAD
 mlearning_row_vec_string_destroy(history_header);
 mlearning_row_vec_string_destroy(model_header);
+=======
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 return;
 }
 mlearning_column_vec_double_destroy(m); //destroyed the old m vector
@@ -354,6 +470,7 @@ k++;
 
 fclose(graph_file);
 //code to store the contents of (m vector) to csv file
+<<<<<<< HEAD
 mlearning_mat_double_to_csv(history,HISTORY_FILE_NAME,history_header);
 mlearning_column_vec_double_to_csv(m,PARAMETERS_FILE_NAME,model_header);
 
@@ -362,6 +479,13 @@ mlearning_mat_double_destroy(dataset);
 mlearning_row_vec_string_destroy(dataset_header);
 mlearning_row_vec_string_destroy(model_header);
 mlearning_row_vec_string_destroy(history_header);
+=======
+mlearning_mat_double_to_csv(history,HISTORY_FILE_NAME);
+mlearning_column_vec_double_to_csv(m,PARAMETERS_FILE_NAME);
+
+//release resources
+mlearning_mat_double_destroy(dataset);
+>>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 mlearning_mat_double_destroy(I);
 mlearning_mat_double_destroy(history);
 mlearning_mat_double_destroy(IT);
