@@ -1,0 +1,8 @@
+#ifndef __M__LEARNING__DATA__ENCODER__
+#define __M__LEARNING__DATA__ENCODER__
+#include<mlearning_vector.h>
+void mlearning_encoder_encode_one_hot(char*source,char*target,mlearning_row_vec_string*encode_columns_vector);
+void mlearning_encoder_encode_to_binary(char*source,char*target,mlearning_row_vec_string*encode_columns_vector);
+void mlearning_encoder_encode(char*source,char*target,mlearning_row_vec_string*encode_columns_vector,char*algorithm);
+
+#endif
