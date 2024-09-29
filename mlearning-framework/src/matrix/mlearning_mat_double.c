@@ -541,7 +541,7 @@ maximum=matrix->data[r][c];
 return maximum;
 }
 
-<<<<<<< HEAD
+
 double mlearning_mat_double_get_mean(mlearning_mat_double*matrix,index_t start_row_index,index_t start_column_index,index_t end_row_index,index_t end_column_index)
 {
 double mean;
@@ -721,5 +721,4 @@ free(shuffled_matrix);
 mlearning_row_vec_string_destroy(header);
 
 }
-=======
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
+
