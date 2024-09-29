@@ -49,7 +49,6 @@ if(index<0 || index>=vector->size) return;
 vector->data[index]=value;
 }
 
-<<<<<<< HEAD
 mlearning_column_vec_double*mlearning_column_vec_double_create_new_filled(dimension_t size,double value,mlearning_column_vec_double*vector)
 {
 index_t r;
@@ -66,15 +65,6 @@ if(vector->size!=size) return NULL;
 }
 
 
-=======
-mlearning_column_vec_double*mlearning_column_vec_double_create_new_filled(dimension_t size,double value)
-{
-index_t r;
-if(size<=0) return NULL;
-mlearning_column_vec_double*vector;
-vector=mlearning_column_vec_double_create_new(size);
-if(vector==NULL) return NULL;
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 for(r=0;r<vector->size;r++)
 {
 vector->data[r]=value;
@@ -123,7 +113,6 @@ return mean;
 
 }
 
-<<<<<<< HEAD
 void mlearning_column_vec_double_to_csv(mlearning_column_vec_double*vector,char*csv_file,mlearning_row_vec_string*header)
 {
 dimension_t header_size;
@@ -154,15 +143,6 @@ else fputc('\n',file);
 
 
 
-=======
-void mlearning_column_vec_double_to_csv(mlearning_column_vec_double*vector,char*csv_file)
-{
-FILE*file;
-index_t i;
-if(vector==NULL || csv_file==NULL) return;
-file=fopen(csv_file,"w");
-if(file==NULL) return;
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 for(i=0;i<vector->size;i++)
 {
 fprintf(file,"%lf",vector->data[i]);
@@ -171,7 +151,6 @@ else fputc(',',file);
 }
 fclose(file);
 }
-<<<<<<< HEAD
 mlearning_column_vec_double * mlearning_column_vec_double_from_csv(char*csv_file,mlearning_column_vec_double*vector,mlearning_row_vec_string**header)
 {
 index_t j;
@@ -181,19 +160,10 @@ index_t header_index;
 char header_string[1507];
 char m;
 dimension_t size; 
-=======
-mlearning_column_vec_double * mlearning_column_vec_double_from_csv(char*csv_file,mlearning_column_vec_double*vector)
-{
-index_t j;
-int index;
-char m;
-dimension_t size;
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 double value;
 char double_string[1025];
 char*end;
 FILE*file;
-<<<<<<< HEAD
 if(csv_file==NULL || header==NULL) return NULL;
 file=fopen(csv_file,"r");
 if(file==NULL) return NULL;
@@ -247,19 +217,12 @@ index++;
 //logic to read the header line ends
 
 
-=======
-file=fopen(csv_file,"r");
-if(file==NULL) return NULL;
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 size=0;
 while(1)
 {
 m=fgetc(file);
 if(feof(file)) break;
-<<<<<<< HEAD
 if(m=='\r') continue;
-=======
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 if(m==',') size++;
 }
 size++;
@@ -270,17 +233,13 @@ vector=mlearning_column_vec_double_create_new(size);
 if(vector==NULL)
 {
 fclose(file);
-<<<<<<< HEAD
 mlearning_row_vec_string_destroy(*header);
 *header=NULL;
-=======
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 return NULL;
 }
 }
 else 
 {
-<<<<<<< HEAD
 if(vector->size!=size) 
 {
 fclose(file);
@@ -288,14 +247,10 @@ mlearning_row_vec_string_destroy(*header);
 *header=NULL;
 return NULL;
 }
-=======
-if(vector->size!=size) return NULL;
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 }
 
 
 rewind(file);
-<<<<<<< HEAD
 //skip the first header line
 while(1)
 {
@@ -305,18 +260,13 @@ if(m=='\r') continue;
 if(m=='\n') break;
 }
 
-=======
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 j=0;
 index=0;
 while(1)
 {
 m=fgetc(file);
 if(feof(file)) break;
-<<<<<<< HEAD
 if(m=='\r') continue;
-=======
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 if(m==',' || m=='\n')
 {
 double_string[index]='\0';
@@ -373,7 +323,6 @@ if(index<0 || index>=vector->size) return;
 vector->data[index]=value;
 }
 
-<<<<<<< HEAD
 mlearning_row_vec_double*mlearning_row_vec_double_create_new_filled(dimension_t size,double value,mlearning_row_vec_double*vector)
 {
 index_t r;
@@ -389,15 +338,6 @@ else
 if(vector->size!=size) return NULL;
 }
 
-=======
-mlearning_row_vec_double*mlearning_row_vec_double_create_new_filled(dimension_t size,double value)
-{
-index_t r;
-if(size<=0) return NULL;
-mlearning_row_vec_double*vector;
-vector=mlearning_row_vec_double_create_new(size);
-if(vector==NULL) return NULL;
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 for(r=0;r<vector->size;r++)
 {
 vector->data[r]=value;
@@ -445,7 +385,6 @@ mean=sum/(double)vector->size;
 return mean;
 }
 
-<<<<<<< HEAD
 void mlearning_row_vec_double_to_csv(mlearning_row_vec_double*vector,char*csv_file,mlearning_row_vec_string*header)
 {
 dimension_t header_size;
@@ -476,15 +415,6 @@ else fputc('\n',file);
 
 
 
-=======
-void mlearning_row_vec_double_to_csv(mlearning_row_vec_double*vector,char*csv_file)
-{
-FILE*file;
-index_t i;
-if(vector==NULL || csv_file==NULL) return;
-file=fopen(csv_file,"w");
-if(file==NULL) return;
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 for(i=0;i<vector->size;i++)
 {
 fprintf(file,"%lf",vector->data[i]);
@@ -495,7 +425,6 @@ fclose(file);
 }
 
 
-<<<<<<< HEAD
 mlearning_row_vec_double * mlearning_row_vec_double_from_csv(char*csv_file,mlearning_row_vec_double*vector,mlearning_row_vec_string**header)
 {
 index_t j;
@@ -503,19 +432,12 @@ int index;
 dimension_t header_size;
 index_t header_index;
 char header_string[1507];
-=======
-mlearning_row_vec_double * mlearning_row_vec_double_from_csv(char*csv_file,mlearning_row_vec_double*vector)
-{
-index_t j;
-int index;
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 char m;
 dimension_t size;
 double value;
 char double_string[1025];
 char*end;
 FILE*file;
-<<<<<<< HEAD
 if(csv_file==NULL || header==NULL) return NULL;
 file=fopen(csv_file,"r");
 if(file==NULL) return NULL;
@@ -565,16 +487,11 @@ index++;
 
 
 
-=======
-file=fopen(csv_file,"r");
-if(file==NULL) return NULL;
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 size=0;
 while(1)
 {
 m=fgetc(file);
 if(feof(file)) break;
-<<<<<<< HEAD
 if(m=='\r') continue;
 if(m==',') size++;
 }
@@ -586,11 +503,6 @@ fclose(file);
 *header=NULL;
 return NULL;
 }
-=======
-if(m==',') size++;
-}
-size++;
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 
 if(vector==NULL)
 {
@@ -598,17 +510,13 @@ vector=mlearning_row_vec_double_create_new(size);
 if(vector==NULL)
 {
 fclose(file);
-<<<<<<< HEAD
 mlearning_row_vec_string_destroy(*header);
 *header=NULL;
-=======
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 return NULL;
 }
 }
 else 
 {
-<<<<<<< HEAD
 if(vector->size!=size) 
 {
 fclose(file);
@@ -616,14 +524,10 @@ mlearning_row_vec_string_destroy(*header);
 *header=NULL;
 return NULL;
 }
-=======
-if(vector->size!=size) return NULL;
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 }
 
 
 rewind(file);
-<<<<<<< HEAD
 //skip the first header line 
 while(1)
 {
@@ -632,18 +536,13 @@ if(feof(file)) break;
 if(m=='\r') continue;
 if(m=='\n') break;
 }
-=======
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 j=0;
 index=0;
 while(1)
 {
 m=fgetc(file);
 if(feof(file)) break;
-<<<<<<< HEAD
 if(m=='\r') continue;
-=======
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 if(m==',' || m=='\n')
 {
 double_string[index]='\0';

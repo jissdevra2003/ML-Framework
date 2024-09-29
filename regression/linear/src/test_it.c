@@ -49,10 +49,7 @@ if(I==NULL)
 {
 printf("Low memory\n");
 mlearning_mat_double_destroy(dataset);
-<<<<<<< HEAD
 mlearning_row_vec_string_destroy(dataset_header);
-=======
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 return;
 }
 
@@ -60,42 +57,26 @@ mlearning_mat_double_copy(I,dataset,0,1,0,0,dataset_rows-1,dataset_columns-2);
 
 mlearning_mat_double_fill(I,0,0,I_rows-1,0,1.0);
 
-<<<<<<< HEAD
 m=mlearning_column_vec_double_from_csv(PARAMETERS_FILE_NAME,NULL,&model_header);
-=======
-m=mlearning_column_vec_double_from_csv(PARAMETERS_FILE_NAME);
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 if(m==NULL)
 {
 printf("Low memory\n");
 mlearning_mat_double_destroy(dataset);
-<<<<<<< HEAD
 mlearning_row_vec_string_destroy(dataset_header);
-=======
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 mlearning_mat_double_destroy(I);
 return;
 }
 
 
-<<<<<<< HEAD
 P=mlearning_multiply_double_matrix_with_column_vector(I,m,NULL);
-=======
-P=mlearning_multiply_double_matrix_with_column_vector(I,m);
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 if(P==NULL)
 {
 printf("Low memory\n");
 mlearning_mat_double_destroy(dataset);
-<<<<<<< HEAD
 mlearning_row_vec_string_destroy(dataset_header);
 mlearning_mat_double_destroy(I);
 mlearning_column_vec_double_destroy(m);
 mlearning_row_vec_string_destroy(model_header);
-=======
-mlearning_mat_double_destroy(I);
-mlearning_column_vec_double_destroy(m);
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 return;
 }
 results_file=fopen(RESULTS_FILE_NAME,"w");
@@ -105,17 +86,11 @@ printf("Could not load results file\n");
 mlearning_mat_double_destroy(dataset);
 mlearning_mat_double_destroy(I);
 mlearning_column_vec_double_destroy(m);
-<<<<<<< HEAD
 mlearning_row_vec_string_destroy(dataset_header);
 mlearning_row_vec_string_destroy(model_header);
 return;
 }
 fprintf(results_file,"input,actual_profit,predicted_profit\n");
-=======
-return;
-}
-//fprintf(results_file,"input,actual_profit,predicted_profit\n");
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 for(r=0;r<dataset_rows;r++)
 {
 for(c=0;c<dataset_columns;c++)
