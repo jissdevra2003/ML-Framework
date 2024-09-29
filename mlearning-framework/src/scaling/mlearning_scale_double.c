@@ -642,7 +642,7 @@ if(start_row_index>end_row_index) return NULL;
 if(start_column_index>end_column_index) return NULL;
 scaled_matrix_rows=end_row_index-start_row_index+1;
 scaled_matrix_columns=end_column_index-start_column_index+1;
-if(mean_sd_rows!=2) return NULL;  //0th row for min value and 1st row for max value
+if(mean_sd_rows!=2) return NULL;  //0th row for min value and 1st row for max value   
 if(mean_sd_columns!=scaled_matrix_columns) return NULL;
 
 if(scaled_matrix==NULL)
