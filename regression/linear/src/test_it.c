@@ -12,10 +12,7 @@ char*PARAMETERS_FILE_NAME=NULL;
 void test_it()
 {
 mlearning_mat_double*dataset;
-<<<<<<< HEAD
 mlearning_row_vec_string*dataset_header;
-=======
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 dimension_t dataset_rows,dataset_columns;
 index_t r,c;
 mlearning_mat_double*I;
@@ -23,16 +20,10 @@ dimension_t I_rows,I_columns;
 FILE*results_file;
 
 mlearning_column_vec_double*m;
-<<<<<<< HEAD
 mlearning_row_vec_string*model_header;
 mlearning_column_vec_double*P;
 
 dataset=mlearning_mat_double_from_csv(DATASET_FILE_NAME,NULL,&dataset_header);
-=======
-mlearning_column_vec_double*P;
-
-dataset=mlearning_mat_double_from_csv(DATASET_FILE_NAME);
->>>>>>> 887f9908761afa88b4c3556809a4a3cb4c75c6ca
 if(dataset==NULL)
 {
 printf("Low memory\n");

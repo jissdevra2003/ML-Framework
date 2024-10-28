@@ -497,7 +497,7 @@ if(i<size) //found the cth column that has to be encoded
 set_size=mlearning_set_string_get_size(sets[i]);
 largest_code=set_size-1;
 mlearning_number_to_binary_string(largest_code,b_string);
-for(b_index=0;b_string[b_index]=='0';b_index++);
+for(b_index=0;b_string[b_index]=='0';b_index++);	
 bits_required=32-b_index;
 for(b_index=1;b_index<=bits_required;b_index++)
 {

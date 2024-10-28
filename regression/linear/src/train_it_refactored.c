@@ -45,7 +45,7 @@ dimension_t E_vector_size;
 
 mlearning_column_vec_double*A;
 mlearning_column_vec_double*m;
-mlearning_row_vec_string*model_header;
+mlearning_row_vec_string*model_header;  //parameters file header
 mlearning_column_vec_double*P;
 mlearning_column_vec_double*E;
 mlearning_row_vec_double*ET;
@@ -504,7 +504,7 @@ GRAPH_FILE_NAME=argv[6];
 if(argc==8)
 {
 ptr=NULL;
-NUMBER_OF_ITERATIONS=strtoull(argv[7],&ptr,10);
+NUMBER_OF_ITERATIONS=strtoull(argv[7],&ptr,10);  //ull(unsigned long long)
 }
 
 h_thread=CreateThread(NULL,0,thread_function,NULL,0,&thread_id);

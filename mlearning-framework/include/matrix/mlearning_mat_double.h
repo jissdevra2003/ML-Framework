@@ -26,4 +26,7 @@ double mlearning_mat_double_get_mean(mlearning_mat_double*matrix,index_t start_r
 double mlearning_mat_double_get_standard_deviation(mlearning_mat_double*matrix,index_t start_row_index,index_t start_column_index,index_t end_row_index,index_t end_column_index);
 void mlearning_mat_double_load_training_testing_data(char*csv_file_name,mlearning_mat_double**training_data,mlearning_mat_double**testing_data,uint8_t test_data_percentage);
 
+void mlearning_mat_double_reshape_matrix(mlearning_mat_double**matrix,dimension_t new_rows,dimension_t new_columns);
+void mlearning_mat_double_right_shift_matrix_cols(mlearning_mat_double*matrix,dimension_t shift_by);
+void mlearning_mat_double_left_shift_matrix_cols(mlearning_mat_double*matrix,dimension_t shift_by);
 #endif

@@ -1,0 +1,5 @@
+#ifndef __M__LEARNING__COMPUTE__SCORE__
+#define __M__LEARNING__COMPUTE__SCORE__
+#include<mlearning_vector.h>
+double mlearning_compute_r2_score(mlearning_column_vec_double*actual_values_vector,mlearning_column_vec_double*predicted_values_vector);
+#endif

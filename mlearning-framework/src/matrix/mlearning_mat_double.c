@@ -549,7 +549,7 @@ void mlearning_mat_double_load_training_testing_data(char*csv_file_name,mlearnin
 mlearning_mat_double*matrix;
 mlearning_mat_double*minor_matrix;
 mlearning_mat_double*major_matrix;
-//gfgf
+
 mlearning_row_vec_string*header;
 mlearning_mat_double*shuffled_matrix;
 dimension_t shuffled_matrix_rows,shuffled_matrix_columns;
@@ -665,4 +665,127 @@ free(shuffled_matrix);
 mlearning_row_vec_string_destroy(header);
 
 }
+
+void mlearning_mat_double_reshape_matrix(mlearning_mat_double**matrix,dimension_t new_rows,dimension_t new_columns)
+{
+double**new_data;
+double*new_double_row;
+index_t i;
+mlearning_mat_double*mat;
+if(matrix==NULL) return;
+if(new_rows<=0 || new_columns<=0) 
+{
+mlearning_mat_double_destroy(*matrix);
+*matrix=NULL;
+return;
+}
+mat=*matrix;
+if(new_rows==mat->rows && new_columns==mat->columns) return;
+
+if(new_rows>mat->rows)  //increase the number of rows
+{
+new_data=(double**)realloc(mat->data,sizeof(double*)*new_rows);
+if(new_data==NULL)
+{
+mlearning_mat_double_destroy(mat);
+*matrix=NULL;
+return;
+}
+mat->data=new_data;
+mat->rows=new_rows;
+for(i=mat->rows;i<new_rows;i++)
+{
+mat->data[i]=NULL;
+}
+
+}
+else if(new_rows<mat->rows)  //decrease the number of rows
+{
+for(i=new_rows;i<mat->rows;i++)  //released the extra rows
+{
+free(mat->data[i]);
+}
+new_data=(double**)realloc(mat->data,sizeof(double*)*new_rows);
+if(new_data==NULL)  //if fails release the remaining rows
+{
+for(i=0;i<new_rows;i++)
+{
+free(mat->data[i]);
+}
+free(mat->data);
+free(mat);
+*matrix=NULL;
+return;
+}
+mat->data=new_data;
+mat->rows=new_rows;
+}
+
+//now variation in columns
+if(new_columns==mat->columns) return;
+for(i=0;i<mat->rows;i++)
+{
+new_double_row=(double*)realloc(mat->data[i],sizeof(double)*new_columns);
+if(new_double_row==NULL)
+{
+mlearning_mat_double_destroy(mat);
+*matrix=NULL;
+return;
+}
+mat->data[i]=new_double_row;
+}
+mat->columns=new_columns;
+
+}
+
+void mlearning_mat_double_right_shift_matrix_cols(mlearning_mat_double*matrix,dimension_t shift_by)
+{
+index_t r,c;
+index_t new_c;
+if(matrix==NULL) return;
+if(shift_by<=0) return;
+if(shift_by>matrix->columns) shift_by=matrix->columns;
+
+for(r=0;r<matrix->rows;r++)
+{
+c=matrix->columns-1;
+while(1)
+{
+new_c=c+shift_by;
+if(new_c<matrix->columns)
+{
+matrix->data[r][new_c]=matrix->data[r][c];
+}
+matrix->data[r][c]=0.0;
+if(c==0) break;
+c--;
+}
+}
+}
+
+void mlearning_mat_double_left_shift_matrix_cols(mlearning_mat_double*matrix,dimension_t shift_by)
+{
+int64_t r,c,new_c;
+if(matrix==NULL) return;
+if(shift_by<=0) return;
+if(shift_by>matrix->columns) shift_by=matrix->columns;
+
+for(r=0;r<matrix->rows;r++)
+{
+c=0;
+while(c<matrix->columns)
+{
+new_c=c-shift_by;
+if(new_c>=0)
+{
+matrix->data[r][new_c]=matrix->data[r][c];
+}
+matrix->data[r][c]=0.0;
+c++;
+}
+}
+
+}
+
+
 
